@@ -1,0 +1,42 @@
+<!doctype html>
+<style>
+  body,
+  html {
+    margin: 0%;
+    background-color: rgba(170, 170, 256);
+    width: 100%;
+    height: 400%;
+    overflow-x: hidden;
+  }
+
+  #hhh {
+    /* mult donut*/
+    position: fixed;
+    width: 300px;
+    bottom: 0%;
+    left: 0%;
+  }
+  #hh {
+    /* single donut*/
+    position: fixed;
+    width: 200px;
+    top: -4%;
+    right: -3%;
+  }
+  #h {
+    /* sky */
+    width: 200%;
+    right: 0;
+    top: -10%;
+  }
+</style>
+<html>
+  <body></body>
+  <img src="clouds.png" id="h" />
+  <img src="donutta.png" id="hhh" onclick="splat.play()" />
+  <img src="donut.png" id="hh" onclick="splat.play()" />
+  <img src="sf2.png" id="hhhh" />
+</html>
+<script>
+  var splat = new Audio("splat.mp3");
+</script>
