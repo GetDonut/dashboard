@@ -2,391 +2,216 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
-    <title>t0Mat0</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ui_demo</title>
     <style>
-      html {
-        margin: 0%;
-        transition: ease 500ms;
+      * {
+        color: #909a8d;
       }
       body {
-        display: flex;
-        height: 100vh;
-        width: 100vw;
-        flex-direction: column;
-        background-image: url("hheelloo.webp");
-        overflow: hidden;
-        transition: ease 500ms;
-        overflow-x: hidden;
-        margin: 0%;
-      }
-      #arr {
-        height: 300vh;
-        background-color: rgba(150, 110, 186, 0.615);
-        width: 100vw;
-        z-index: 0;
-        position: absolute;
-        transition: ease 500ms;
-        top: 0vh;
-        margin: 0%;
-      }
-      #panel {
-        position: fixed;
-        bottom: 0%;
+        background: #9fa0a8; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #5c7852,
+          #9fa0a8
+        ); /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(
-          to bottom,
-          rgb(149, 120, 255),
-          rgb(108, 76, 224)
-        );
-        width: 100vw;
-        height: 15vh;
-        display: flex;
-        opacity: 80%;
-        flex-wrap: wrap;
-        z-index: 99;
+          to right,
+          #5c7852,
+          #9fa0a8
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       }
-      #f {
-        z-index: 1;
-        position: absolute;
-        background-color: rgb(46, 6, 6);
-        width: 50%;
-        top: 25%;
-        left: 19%;
-        height: 40%;
-        display: flex;
-        justify-content: center;
-        overflow-y: scroll;
-        border: rgb(23, 2, 2) solid 20px;
-      }
-      #plate {
-        z-index: 1;
-        position: absolute;
-        background-color: rgba(1, 1, 1);
-        height: 900px;
-        width: 275px;
-      }
-      #hhhh {
-        width: 100%;
-      }
-      #hhh {
-        position: absolute;
-        z-index: 4;
-        width: 60%;
-        bottom: -5%;
-        left: 0%;
-      }
-      #hh {
-        position: absolute;
-        z-index: 1;
-        width: 460px;
-        top: -20%;
-        right: -20%;
-      }
-      #h {
-        position: absolute;
-        width: 100%;
-        height: 150px;
-        right: 0%;
-        top: 0%;
-        z-index: 2;
-      }
-      #r {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        right: 0%;
-        top: 0%;
-        background-color: blueviolet;
-        z-index: 5;
-      }
-      #a {
-        z-index: 1;
-        position: absolute;
-        width: 70%;
-        top: 22%;
-        left: 18%;
-        display: flex;
-        justify-content: center;
-      }
-      .ttt {
-        width: 100vw;
-        z-index: 3;
+      body,
+      html {
         margin: 0%;
-        background-image: radial-gradient(
-          circle at center,
-          rgb(215, 29, 140) 0vh,
-          rgba(195, 53, 178, 0) 50%
-        );
+        width: 100vw;
         height: 100vh;
+        overflow: hidden;
+      }
+
+      .signin {
+        position: absolute;
+        left: 15vw;
+        top: 15vh;
+        width: 70vw;
+        height: 70vh;
+        background-color: aliceblue;
+        border-radius: 2%;
+        user-select: none;
+        transition: ease-in 5ms;
+      }
+      .termin {
+        position: absolute;
+        left: 0vw;
+        top: 0vh;
+        width: 100vw;
+        height: 100vh;
+        background-color: aliceblue;
+        border-radius: 2%;
+        user-select: none;
+        transition: ease-in 70ms;
+      }
+      .active:active {
+        left: 16.5vw;
+        top: 16.5vh;
+        width: 67vw;
+        height: 67vh;
+        background-color: rgb(189, 189, 189);
+      }
+      h1 {
+        font-size: 50px;
+        color: rgb(93, 126, 93);
+        margin-left: 2%;
+      }
+      h2 {
+        font-size: 20px;
+        color: rgb(87, 98, 87);
+        margin-left: 2%;
+      }
+      #shadow {
+        background-color: black;
+        opacity: 10%;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        margin: 0%;
+        transition: ease-in 1000ms;
+      }
+      .horizcenter {
         display: flex;
-        justify-content: center;
         align-items: center;
+        flex-direction: column;
+        gap: 7%;
       }
-      #tt {
-        width: 700px;
-        position: relative;
-        height: 600px;
+      .togOn {
+        transition: ease 200ms;
+        width: 60vw;
+        text-align: center;
       }
-      .tra {
-        height: 50%;
-        width: 60px;
-        background-color: rgb(108, 76, 224);
-        border-radius: 10%;
-
-        top: 0%;
+      .togOn:hover {
+        background-color: #61db94;
+        color: #27ae60;
       }
-      .hmm {
-        position: relative;
-        top: 5%;
-        left: 10%;
-        height: 80%;
+      input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
         width: 80%;
+        padding: 10px;
+        transition: border-color 0.3s ease;
+        outline: none;
+      }
 
-        background-color: rgb(149, 120, 255);
-        border-radius: 10%;
-      }
-      .tra:active {
-        height: 45%;
-        top: 5%;
-        background-color: rgb(95, 67, 195);
-        border-radius: 10%;
-      }
-      #sea {
-        background-color: purple;
-        background-image: url(sea.gif);
-
-        width: 100%;
-        height: 5%;
-        position: absolute;
-        top: 130vh;
-        overflow: hidden;
-        z-index: 2;
-        transition: ease 9s;
-      }
-      #sand {
-        background-color: palevioletred;
-        position: absolute;
-        width: 100%;
-        height: 20%;
-        z-index: 1;
-        bottom: 100vh;
-      }
-      #chat {
-        overflow: hidden;
-        position: relative;
-        width: 80%;
-        height: 80%;
-        top: 10vh;
-        right: -10vw;
-        transform: scale(0.75);
-        z-index: 4;
-        opacity: 80%;
-      }
-      #fly {
-        width: 100%;
-        position: relative;
-        z-index: 3;
-        bottom: 10%;
+      input:focus {
+        border-color: #27ae60;
       }
     </style>
   </head>
+
   <body>
-    <div id="r">loading...</div>
-    <img src="clouds.png" id="h" alt="clouds" />
-    <img src="disco.gif" id="disco" />
-    <div id="arr">
-      <div id="panel">
-        <div id="ponel">
-          <div class="tra">
-            <div class="hmm" onclick="ar.style.top = '0vh'">T</div>
-          </div>
-          <div class="tra">
-            <div class="hmm" onclick="ar.style.top = '-100vh'">S</div>
-          </div>
-          <div class="tra">
-            <div class="hmm" onclick="ar.style.top = '-200vh'">A</div>
-          </div>
-        </div>
-      </div>
-      <div class="ttt">
-        <div id="tt">
-          <img src="donut.png" id="hh" onclick="splat.play()" alt="donut" />
-          <img src="donutta.png" id="hhh" onclick="splat.play()" alt="donuts" />
-          <div id="f">
-            <div id="plate"><img src="ghostface.webp" id="hhhh" /></div>
-          </div>
-          <img src="tv2.png" id="a" alt="tv" />
-        </div>
-      </div>
-
-      <div class="ttt">
-        <div id="sea"></div>
-        <div
-          id="chat-container"
-          style="
-            position: relative;
-            top: 10vh;
-            left: 10vw;
-            width: 80vw;
-            z-index: 10;
-          "
-        >
-          <div
-            id="chat-display"
-            style="
-              height: 300px;
-              background: rgba(0, 0, 0, 0.5);
-              color: white;
-              border: 2px solid #9578ff;
-              overflow-y: auto;
-              padding: 10px;
-              margin-bottom: 10px;
-              font-family: sans-serif;
-            "
-          >
-            <p><i>System: Connecting to the void...</i></p>
-          </div>
-
-          <div style="display: flex; gap: 5px">
-            <input
-              type="text"
-              id="chatInput"
-              style="
-                flex-grow: 1;
-                padding: 10px;
-                border: none;
-                border-radius: 5px;
-              "
-            />
-            <button
-              onclick="sendMessage()"
-              style="
-                padding: 10px 20px;
-                background: #6c4ce0;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-              "
-            >
-              Send
-            </button>
-          </div>
-        </div>
-        <script>
-          let userName = "";
-
-          const socket = new WebSocket(
-            "wss://free.blr2.piesocket.com/v3/1?api_key=MjoCdbJ75TF9kkCMMpUUZumuDjUicq0p9p0v4AdX",
-          );
-
-          const display = document.getElementById("chat-display");
-          const input = document.getElementById("chatInput");
-          input.placeholder = "enter your username";
-          socket.onmessage = function (event) {
-            let hell = JSON.parse(event.data);
-            const newMsg = document.createElement("p");
-            newMsg.textContent = `${hell.userName}> ${hell.data}`;
-            newMsg.style.margin = "5px 0";
-            display.appendChild(newMsg);
-
-            display.scrollTop = display.scrollHeight;
-          };
-
-          socket.onopen = () => {
-            display.innerHTML += `<p style="color: #00ff00;">> Connected!</p>`;
-          };
-
-          socket.onerror = (err) => {
-            display.innerHTML += `<p style="color: #ff0000;">> OPP youre offline silly</p>`;
-          };
-
-          // 3. Send message function
-          function sendMessage() {
-            if (userName) {
-              if (input.value.trim() !== "") {
-                socket.send(
-                  JSON.stringify({ userName: userName, data: input.value }),
-                );
-                display.innerHTML += `<p style="color: #aaa;">You: ${input.value}</p>`;
-                input.value = "";
-              }
-            } else {
-              userName = input.value;
-              input.value = "";
-              input.placeholder = "type your message ....";
-            }
-          }
-
-          // Allow pressing "Enter" to send
-          input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") sendMessage();
-          });
-        </script>
-        <img src="flies.gif" id="fly" />
-        <div id="sand"></div>
-      </div>
-
-      <div class="ttt"></div>
+    <div id="stat"></div>
+    <div
+      class="active signin"
+      id="sigin"
+      onclick="
+        setTimeout(
+          () =>
+            promptIn(profile, [
+              { n: 'what is your username', type: 'disp' },
+              { n: 'name', type: 'textIn' },
+              { n: 'and what are you?', type: 'disp' },
+              { n: 'type', choice: ['student', 'teacher'], type: 'check' },
+            ]),
+          400,
+        )
+      "
+    >
+      <h1>Hello_World!</h1>
+      <h2>to_ui_demo</h2>
+      <h2>sign in to continue</h2>
     </div>
-    <script>
-      const splat = new Audio("splat.mp3");
-      const pan = document.getElementById("tt");
-      const buff = document.getElementById("r");
-      const ar = document.getElementById("arr");
-      const tv = document.getElementById("hhhh");
-      const sea = document.getElementById("sea");
-      const tra = document.getElementsByClassName("tra");
-      const content = ["ghostface.webp", "sf2.png"];
-      const rand = (Max) => {
-        return Math.round(Math.random() * (Max - 1));
-      };
-      const buffOn = (flag) => {
-        if (flag) {
-          buff.style.visibility = "visible"; // Fixed typo 'visable'
-          buff.style.zIndex = "5";
-        } else {
-          buff.style.visibility = "hidden";
-          buff.style.zIndex = "0";
-        }
-      };
-
-      const work = () => {
-        buffOn(1);
-        let xxc =
-          window.innerHeight > window.innerWidth
-            ? window.innerWidth
-            : window.innerHeight;
-        pan.style.scale = `${xxc / 1000}`;
-        for (let i = 0; i < tra.length; i++) {
-          tra[i].style.position = "absolute";
-          tra[i].style.left = `${25 + 25 * i}%`;
-          tv.src = content[rand(2)];
-        }
-        buffOn(0);
-      };
-
-      window.onload = (event) => {
-        work();
-      };
-      window.onresize = (event) => {
-        work();
-      };
-      setInterval(() => {
-        if (sea.style.height == "10%") {
-          sea.style.height = "5%";
-          sea.style.borderBottomLeftRadius = "0%";
-          sea.style.borderBottomRightRadius = "0%";
-        } else {
-          sea.style.height = "10%";
-          sea.style.borderBottomLeftRadius = "40%";
-          sea.style.borderBottomRightRadius = "40%";
-        }
-      }, 5000);
-    </script>
   </body>
+  <script>
+    class person {
+      constructor(name, text) {
+        this.name = name;
+        this.text = text;
+      }
+    }
+    const tch = [
+      new person("A1_34", "hi i teach sci"),
+      new person("A1_29", "hi i teach math"),
+      new person("A1_23", "hi i teach eng"),
+    ];
+    const std = [];
+    let shadow;
+    const profile = { name: "guest...", type: null, cudir: null };
+    const promptOut = () => {
+      document.getElementById("prompt").remove();
+      document.getElementById("shadow").remove();
+    };
+    const promptIn = (obj, inp) => {
+      shadow = document.createElement("div");
+      shadow.id = "shadow";
+      shadow.addEventListener("click", () => {});
+      document.querySelector("body").append(shadow);
+      shadow.style.opacity = "80%";
+      const prompt = document.createElement("div");
+      prompt.classList.add("signin", "horizcenter");
+      prompt.id = "prompt";
+      for (let i = 0; i < inp.length; i++) {
+        let child = document.createElement("div");
+        switch (inp[i].type) {
+          case "disp":
+            child.textContent = inp[i].n;
+            break;
+          case "textIn":
+            child = document.createElement("input");
+            child.type = "text";
+            child.placeholder = obj[inp[i].n] ? obj[inp[i].n] : inp[i].n;
+            child.function = () => {
+              obj[inp[i].n] = child.value;
+            };
+            break;
+          case "check":
+            child.tag;
+            for (let j = 0; j < inp[i].choice.length; j++) {
+              let choice = document.createElement("div");
+              choice.classList.add("togOn");
+              choice.textContent = inp[i].choice[j];
+              choice.number = j;
+              choice.addEventListener("click", () => {
+                child.tag = choice.number;
+                choice.style.transform = "scale(5)";
+                choice.style.opacity = "20%";
+                choice.style.backgroundColor = "#3d9361";
+                for (let o = 0; o < [...prompt.children].length; o++) {
+                  if ([...prompt.children][o].function) {
+                    [...prompt.children][o].function();
+                  }
+                }
+
+                prompt.classList.add("termin");
+                prompt.style.opacity = "20%";
+                setTimeout(() => {
+                  promptOut();
+                }, 200); // match your CSS transition (200ms)
+              });
+
+              child.append(choice);
+            }
+            child.function = () => {
+              obj[inp[i].n] = [...child.children][child.tag].textContent;
+            };
+            break;
+        }
+        if (!i) child.style.marginTop = "10%";
+        prompt.append(child);
+      }
+      prompt.style.opacity = "20%";
+      document.querySelector("body").append(prompt);
+      setTimeout(() => {
+        prompt.style.opacity = "100%";
+      }, 2);
+    };
+  </script>
 </html>
