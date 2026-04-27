@@ -38,7 +38,7 @@
         background-color: aliceblue;
         border-radius: 2%;
         user-select: none;
-        transition: ease-in 5ms;
+        transition: ease-in 500ms;
       }
       .termin {
         position: absolute;
@@ -59,12 +59,12 @@
         background-color: rgb(189, 189, 189);
       }
       h1 {
-        font-size: 50px;
+        font-size: 6vw;
         color: rgb(93, 126, 93);
         margin-left: 2%;
       }
       h2 {
-        font-size: 20px;
+        font-size: 3vw;
         color: rgb(87, 98, 87);
         margin-left: 2%;
       }
@@ -104,11 +104,39 @@
       input:focus {
         border-color: #27ae60;
       }
+      #stat {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+      }
+      #dash {
+        position: absolute;
+        right: -100vw;
+        top: 100vh;
+        width: 100vw;
+        height: 100vh;
+        transition: ease-in 500ms;
+        display: flex;
+        flex-direction: row;
+        gap: 2vw;
+        align-items: center;
+        justify-content: center;
+      }
+      .dashItem {
+        width: 30vw;
+        background-color: rgb(182, 196, 182);
+        height: 30vw;
+        border-radius: 2%;
+      }
+      .dashItem:hover {
+        width: 40vw;
+        background-color: rgb(195, 211, 195);
+        height: 40vw;
+      }
     </style>
   </head>
 
   <body>
-    <div id="stat"></div>
     <div
       class="active signin"
       id="sigin"
@@ -129,6 +157,8 @@
       <h2>to_ui_demo</h2>
       <h2>sign in to continue</h2>
     </div>
+    <div id="stat"></div>
+    <div id="dash"></div>
   </body>
   <script>
     class person {
@@ -142,12 +172,70 @@
       new person("A1_29", "hi i teach math"),
       new person("A1_23", "hi i teach eng"),
     ];
-    const std = [];
+    const std = [
+      new person("B1_13", "i need help with phys"),
+      new person("B1_17", "i need help with history"),
+      new person("B1_12", "i need help with reaching nirvana"),
+    ];
     let shadow;
     const profile = { name: "guest...", type: null, cudir: null };
+
+    const stat = () => {
+      let stati = document.getElementById("stat");
+      stati.textContent = "";
+      let name = document.createElement("h1");
+      name.textContent = profile.name;
+      name.style.margin = "0%";
+      stati.append(name);
+      name.style.color = "rgba(195, 235, 195)";
+      name = document.createElement("h2");
+      name.textContent = profile.type;
+      stati.append(name);
+    };
+    const viewP = (obj) => {
+      let dashi = document.getElementById("dash");
+
+      for (let d = 0; d < obj.length; d++) {
+        let clid = document.createElement("div");
+        let keys = Object.keys(obj[d]);
+        for (let t = 0; t < keys.length; t++) {
+          let eee = !t
+            ? document.createElement("h1")
+            : document.createElement("h2");
+          eee.textContent = obj[d][keys[t]];
+          clid.classList.add("dashItem");
+          clid.append(eee);
+        }
+        // clid.style.transform = "scale(0.5)";
+        dashi.append(clid);
+      }
+      setTimeout(() => {
+        dashi.style.right = "0vw";
+      }, 500);
+    };
+    const popUp = () => {
+      setTimeout(() => {
+        let stati = document.getElementById("sigin");
+        let dashi = document.getElementById("dash");
+        stati.style.top = "-90vh";
+        stati.style.left = "0vh";
+        stati.style.transform = "scale(2)";
+        stati.style.opacity = "0%";
+        dashi.style.top = "0vh";
+      }, 50);
+    };
     const promptOut = () => {
       document.getElementById("prompt").remove();
       document.getElementById("shadow").remove();
+      stat();
+      popUp();
+      let ch;
+      if (profile.type == "student") {
+        ch = tch;
+      } else {
+        ch = std;
+      }
+      viewP(ch);
     };
     const promptIn = (obj, inp) => {
       shadow = document.createElement("div");
@@ -169,7 +257,7 @@
             child.type = "text";
             child.placeholder = obj[inp[i].n] ? obj[inp[i].n] : inp[i].n;
             child.function = () => {
-              obj[inp[i].n] = child.value;
+              obj[inp[i].n] = child.value ? child.value : obj[inp[i].n];
             };
             break;
           case "check":
