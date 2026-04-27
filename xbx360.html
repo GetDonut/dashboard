@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ui_demo</title>
+    <style>
+      * {
+        color: #909a8d;
+      }
+      body {
+        background: #9fa0a8; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to right,
+          #5c7852,
+          #9fa0a8
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to right,
+          #5c7852,
+          #9fa0a8
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      body,
+      html {
+        margin: 0%;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .signin {
+        position: absolute;
+        left: 15%;
+        top: 15%;
+        width: 70%;
+        height: 70vh;
+        background-color: aliceblue;
+        border-radius: 2%;
+        user-select: none;
+        transition: ease-in 500ms;
+      }
+      .termin {
+        position: absolute;
+        left: 0%;
+        top: 0vh;
+        width: 100%;
+        height: 100%;
+        background-color: aliceblue;
+        border-radius: 2%;
+        user-select: none;
+        transition: ease-in 70ms;
+      }
+      .active:active {
+        left: 16.5%;
+        top: 16.5%;
+        width: 67%;
+        height: 67%;
+        background-color: rgb(189, 189, 189);
+      }
+      h1 {
+        font-size: 6vh;
+        color: rgb(93, 126, 93);
+        margin-left: 2%;
+      }
+      h2 {
+        font-size: 3vh;
+        color: rgb(87, 98, 87);
+        margin-left: 2%;
+      }
+      #shadow {
+        background-color: black;
+        opacity: 10%;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin: 0%;
+        transition: ease-in 1000ms;
+      }
+      .horizcenter {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        gap: 7%;
+      }
+      .togOn {
+        transition: ease 200ms;
+        text-align: center;
+      }
+      .togOn:hover {
+        background-color: #61db94;
+        color: #27ae60;
+      }
+      input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 80%;
+        padding: 10px;
+        transition: border-color 0.3s ease;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #27ae60;
+      }
+      #stat {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+      }
+      #dash {
+        position: absolute;
+        right: -100%;
+        top: 100vh;
+        width: 100%;
+        height: 100%;
+        transition: ease-in 500ms;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .dashItem {
+        width: 30%;
+        background-color: rgb(201, 211, 201);
+        height: 30%;
+        border-radius: 2%;
+        transition: 200ms ease;
+        opacity: 80%;
+        z-index: 1;
+      }
+      .dashItem:hover {
+        background-color: rgb(160, 172, 160);
+        transform: scale(1.75);
+        opacity: 100%;
+        z-index: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="active signin"
+      id="sigin"
+      onclick="
+        setTimeout(
+          () =>
+            promptIn(profile, [
+              { n: 'what is your username', type: 'disp' },
+              { n: 'name', type: 'textIn' },
+              { n: 'and what are you?', type: 'disp' },
+              { n: 'type', choice: ['student', 'teacher'], type: 'check' },
+            ]),
+          400,
+        )
+      "
+    >
+      <h1>Hello_World!</h1>
+      <h2>to_ui_demo</h2>
+      <h2>sign in to continue</h2>
+    </div>
+    <div id="stat"></div>
+    <div id="dash"></div>
+  </body>
+  <script>
+    class person {
+      constructor(name, text) {
+        this.name = name;
+        this.text = text;
+      }
+    }
+    const tch = [
+      new person("A1_34", "hi i teach sci"),
+      new person("A1_29", "hi i teach math"),
+      new person("A1_23", "hi i teach eng"),
+    ];
+    const std = [
+      new person("B1_13", "i need help with phys"),
+      new person("B1_17", "i need help with history"),
+      new person("B1_12", "i need help with reaching nirvana"),
+      new person("B1_13", "i need help with phys"),
+      new person("B1_17", "i need help with history"),
+      new person("B1_12", "i need help with reaching nirvana"),
+    ];
+    let shadow;
+    const profile = { name: "guest...", type: null, cudir: null };
+
+    const stat = () => {
+      let stati = document.getElementById("stat");
+      stati.textContent = "";
+      let name = document.createElement("h1");
+      name.textContent = profile.name;
+      name.style.margin = "0%";
+      stati.append(name);
+      name.style.color = "rgba(195, 235, 195)";
+      name = document.createElement("h2");
+      name.textContent = profile.type;
+      stati.append(name);
+    };
+    const viewP = (obj) => {
+      let dashi = document.getElementById("dash");
+      dashi.textContent = "";
+      for (let d = 0; d < obj.length; d++) {
+        let clid = document.createElement("div");
+        let keys = Object.keys(obj[d]);
+        for (let t = 0; t < keys.length; t++) {
+          let eee = !t
+            ? document.createElement("h1")
+            : document.createElement("h2");
+          eee.textContent = obj[d][keys[t]];
+          clid.classList.add("dashItem");
+
+          clid.append(eee);
+        }
+        if (d < (keys.length - 1) / 2) {
+          clid.style.transformOrigin = "left";
+        } else if (d > keys.length / 2) {
+          clid.style.transformOrigin = "right";
+        } else {
+          clid.style.transformOrigin = "center";
+        }
+        dashi.append(clid);
+      }
+      setTimeout(() => {
+        dashi.style.right = "0%";
+      }, 500);
+    };
+    const popUp = () => {
+      setTimeout(() => {
+        let stati = document.getElementById("sigin");
+        let dashi = document.getElementById("dash");
+        stati.style.top = "-90%";
+        stati.style.left = "0%";
+        stati.style.transform = "scale(2)";
+        stati.style.opacity = "0%";
+        dashi.style.top = "0%";
+      }, 50);
+    };
+    const promptOut = () => {
+      document.getElementById("prompt").remove();
+      document.getElementById("shadow").remove();
+      stat();
+      popUp();
+      let ch;
+      if (profile.type == "student") {
+        ch = tch;
+      } else {
+        ch = std;
+      }
+      viewP(ch);
+    };
+    const promptIn = (obj, inp) => {
+      shadow = document.createElement("div");
+      shadow.id = "shadow";
+      shadow.addEventListener("click", () => {});
+      document.querySelector("body").append(shadow);
+      shadow.style.opacity = "80%";
+      const prompt = document.createElement("div");
+      prompt.classList.add("signin", "horizcenter");
+      prompt.id = "prompt";
+      for (let i = 0; i < inp.length; i++) {
+        let child = document.createElement("div");
+        switch (inp[i].type) {
+          case "disp":
+            child.textContent = inp[i].n;
+            break;
+          case "textIn":
+            child = document.createElement("input");
+            child.type = "text";
+            child.placeholder = obj[inp[i].n] ? obj[inp[i].n] : inp[i].n;
+            child.function = () => {
+              obj[inp[i].n] = child.value ? child.value : obj[inp[i].n];
+            };
+            break;
+          case "check":
+            child.style.width = "60%";
+            for (let j = 0; j < inp[i].choice.length; j++) {
+              let choice = document.createElement("div");
+              choice.classList.add("togOn");
+              choice.textContent = inp[i].choice[j];
+              choice.number = j;
+              choice.addEventListener("click", () => {
+                child.tag = choice.number;
+                choice.style.transform = "scale(5)";
+                choice.style.opacity = "20%";
+                choice.style.backgroundColor = "#3d9361";
+                for (let o = 0; o < [...prompt.children].length; o++) {
+                  if ([...prompt.children][o].function) {
+                    [...prompt.children][o].function();
+                  }
+                }
+
+                prompt.classList.add("termin");
+                prompt.style.opacity = "20%";
+                setTimeout(() => {
+                  promptOut();
+                }, 200);
+              });
+
+              child.append(choice);
+            }
+            child.function = () => {
+              obj[inp[i].n] = [...child.children][child.tag].textContent;
+            };
+            break;
+        }
+        if (!i) child.style.marginTop = "10%";
+        prompt.append(child);
+      }
+      prompt.style.opacity = "20%";
+      document.querySelector("body").append(prompt);
+      setTimeout(() => {
+        prompt.style.opacity = "100%";
+      }, 2);
+    };
+  </script>
+</html>
