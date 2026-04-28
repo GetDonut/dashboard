@@ -43,7 +43,7 @@
         align-items: center;
         justify-content: space-between;
         padding-left: 10px;
-        transition: ease 1000ms;
+        transition: ease 500ms;
       }
       #footer {
         background: linear-gradient(to bottom, #006ee9 0%, #ffffff 100%);
@@ -56,7 +56,7 @@
         bottom: -50px;
         display: flex;
         justify-content: space-between;
-        transition: ease 1000ms;
+        transition: ease 500ms;
       }
       #main {
         transform-origin: 0 0;
@@ -82,7 +82,6 @@
         z-index: 1;
       }
       #mainA {
-        border: solid rgb(65, 90, 111);
         position: absolute;
         width: 500px;
         height: 900px;
@@ -137,6 +136,53 @@
           "GRAD" 200,
           "opsz" 48;
       }
+      #rec {
+        background-color: aliceblue;
+        width: 200vw;
+        padding-left: 500px;
+        height: 100vh;
+      }
+      .file {
+        transform: scale(0.5);
+        transform-origin: left;
+        width: 100px;
+        height: 100px;
+        padding: 20px;
+        font-size: 10;
+        overflow: hidden;
+        clip-path: path(
+          "M 0 85 L 10 24 L 60.5 14.5 C 63 2.5 56.5 0 129 4.5 C 117.5 5 165 0 170 40 L 175 85"
+        );
+        border: black solid 3px;
+      }
+      #folderS {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        justify-content: space-evenly;
+        top: 50px;
+        padding-left: 10vw;
+      }
+      h2 {
+        font-family: "Happy Time Three", serif;
+        font-style: italic;
+        color: #292f36;
+        font-weight: 550;
+        width: 200px;
+        height: 200px;
+        bottom: 20px;
+      }
+      #result {
+        background-color: aliceblue;
+        border-top: black solid;
+        position: absolute;
+        top: 130px;
+        width: 90vw;
+        padding-left: 10vw;
+        height: 100vh;
+      }
     </style>
     <link
       rel="stylesheet"
@@ -177,6 +223,23 @@
             search
           </div>
         </div>
+        <div id="rec">
+          <div id="folderS">
+            <div class="file" style="background-color: #d0ffa4">
+              <h2>yaho</h2>
+            </div>
+            <div class="file" style="background-color: violet">
+              <h2>hiio</h2>
+            </div>
+            <div class="file" style="background-color: #006ee9">
+              <h2>heyo</h2>
+            </div>
+            <div class="file" style="background-color: #83e7ff">
+              <h2>hello</h2>
+            </div>
+          </div>
+          <div id="result"></div>
+        </div>
       </div>
     </div>
 
@@ -211,7 +274,9 @@
         if (event) {
           event.stopPropagation();
         }
-
+        if (window.innerWidth / window.innerHeight >= 2) {
+          return;
+        }
         if (a && sidebarTog) {
           return;
         }
@@ -222,6 +287,15 @@
           main.style.left = "0px";
           sidebarTog = 1;
         }
+        //
+        addEventListener("resize", () => {
+          if (window.innerWidth / window.innerHeight >= 2) {
+            if (!sidebarTog) {
+              sidebarTog = 1;
+              main.style.left = "0px";
+            }
+          }
+        });
       }
     </script>
   </body>
