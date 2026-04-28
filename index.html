@@ -14,11 +14,11 @@
       @font-face {
         font-family: "Happy Time Three";
         src: url("font/happy_time/Happy_Time/HappyTimeThree.otf")
-          format("truetype");
+          format("opentype");
       }
       body {
         margin: 0%;
-        background-color: rgb(185, 191, 197);
+        background-color: aliceblue;
         display: flex;
         flex-direction: column;
         width: 100vw;
@@ -94,7 +94,6 @@
         background-color: aliceblue;
         width: 500px;
         height: 500px;
-
         clip-path: path(
           "M 0 0 L 0 500 L 450 500 L 450 300 C 450 200 450 200 480 200 C 500 200 500 200 500 0"
         );
@@ -123,7 +122,6 @@
         margin-left: 10px;
         padding-left: 35px;
       }
-
       #search {
         position: absolute;
         top: 30px;
@@ -139,52 +137,58 @@
       }
       #rec {
         background-color: aliceblue;
-        width: 200vw;
-        padding-left: 500px;
+        width: 600px;
         height: 100vh;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1;
       }
       .file {
-        transform: scale(0.5);
-        transform-origin: left;
-        width: 100px;
-        height: 100px;
-        padding: 20px;
-        font-size: 10;
+        width: 175px;
+        height: 85px;
+        padding: 10px;
+        font-size: 10px;
         overflow: hidden;
         clip-path: path(
           "M 0 85 L 10 24 L 60.5 14.5 C 63 2.5 56.5 0 129 4.5 C 117.5 5 165 0 170 40 L 175 85"
         );
-        border: black solid 3px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
       }
       #folderS {
-        width: fit-content;
+        width: 500px;
         height: auto;
         display: flex;
         flex-direction: row;
         position: absolute;
         justify-content: space-evenly;
         top: 50px;
-        padding-left: 10vw;
+        right: 0%;
+        gap: 20px;
       }
       h2 {
         font-family: "Happy Time Three", serif;
         font-style: italic;
         color: #292f36;
         font-weight: 550;
-        width: 200px;
-        height: 200px;
-        bottom: 20px;
+        font-size: 1.2rem;
+        margin: 0;
+        padding-bottom: 5px;
       }
       #result {
         background-color: aliceblue;
         border-top: black solid;
+        border-bottom: rgb(180, 180, 180) solid;
         position: absolute;
         top: 80px;
         width: 600px;
         right: 0px;
-        padding-top: 120px;
-        padding-left: 1000px;
-        height: 100vh;
+        padding-top: 70px;
+        padding-bottom: 200px;
+        padding-left: 500px;
+        height: 60vh;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -240,35 +244,37 @@
             search
           </div>
         </div>
-        <div id="rec">
-          <div id="folderS">
-            <div class="file" style="background-color: #d0ffa4">
-              <h2>yaho</h2>
-            </div>
-            <div class="file" style="background-color: violet">
-              <h2>hiio</h2>
-            </div>
-            <div class="file" style="background-color: #006ee9">
-              <h2>heyo</h2>
-            </div>
-            <div class="file" style="background-color: #83e7ff">
-              <h2>hello</h2>
-            </div>
-            <h1 style="position: absolute; right: 40px; top: 70px; z-index: 3">
+      </div>
+
+      <div id="rec">
+        <div id="folderS">
+          <div class="file" style="background-color: #d0ffa4">
+            <h2>yaho</h2>
+          </div>
+          <div class="file" style="background-color: violet">
+            <h2>hiio</h2>
+          </div>
+          <div class="file" style="background-color: #006ee9">
+            <h2>heyo</h2>
+          </div>
+          <div class="file" style="background-color: #83e7ff">
+            <h2>hello</h2>
+          </div>
+
+          <div id="result">
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <div class="r"></div>
+            <h1 style="position: absolute; right: 40px; top: -30px; z-index: 3">
               Recomended
             </h1>
-            <div id="result">
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-              <div class="r"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -278,10 +284,8 @@
       const main = document.getElementById("main");
       const nav = document.getElementById("nav");
       const footer = document.getElementById("footer");
-      ///
       let sidebarTog = 0;
       let inner = 0;
-      ///
       window.addEventListener("load", () => {
         setTimeout(() => {
           nav.style.top = "0px";
@@ -300,7 +304,6 @@
       }
       applyScale();
       main.style.transition = "ease 200ms";
-      ///
       function sidebar(a, event) {
         if (event) {
           event.stopPropagation();
@@ -318,7 +321,6 @@
           main.style.left = "0px";
           sidebarTog = 1;
         }
-        //
         addEventListener("resize", () => {
           if (window.innerWidth / window.innerHeight >= 2) {
             if (!sidebarTog) {
